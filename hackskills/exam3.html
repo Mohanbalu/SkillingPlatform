@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam 3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        .question {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        .question p {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        pre {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+            resize: vertical;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+            textarea {
+                font-size: 12px;
+            }
+            button[type="submit"] {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Exam on C Programming</h1>
+
+        <form id="exam-form">
+            <!-- Multiple Choice Questions -->
+            <div class="question">
+                <p>1. What will be the output of the following code?</p>
+                <pre><code>#include <stdio.h>
+int main() {
+    int x = 5;
+    if (x > 3) {
+        printf("x is greater than 3");
+    } else {
+        printf("x is 3 or less");
+    }
+    return 0;
+}</code></pre>
+                <input type="radio" name="q1" value="A"> A. x is greater than 3<br>
+                <input type="radio" name="q1" value="B"> B. x is 3 or less<br>
+            </div>
+
+            <div class="question">
+                <p>2. Which loop will execute at least once?</p>
+                <input type="radio" name="q2" value="A"> A. for<br>
+                <input type="radio" name="q2" value="B"> B. while<br>
+                <input type="radio" name="q2" value="C"> C. do-while<br>
+            </div>
+
+            <!-- Coding Question -->
+            <div class="question">
+                <p>3. Write a C program to swap two numbers using a temporary variable.</p>
+                <textarea name="coding-q1" rows="10"></textarea>
+            </div>
+
+            <button type="submit" onclick="submitExam()">Submit</button>
+        </form>
+    </div>
+    <script>
+        function submitExam() {
+            // Collect form data
+            const form = document.getElementById('exam-form');
+            const formData = new FormData(form);
+
+            // Here you can process formData or send it to a server
+            console.log('Form submitted:', formData);
+
+            // Redirect to c.html
+            window.location.href = 'c.html';
+        }
+
+        function goBack() {
+            // Redirect to the previous page or home
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

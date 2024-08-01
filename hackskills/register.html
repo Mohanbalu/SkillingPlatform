@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function handleRegister(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            var xhr = new XMLHttpRequest();
+            var formData = new FormData(document.querySelector('form'));
+
+            xhr.open('POST', 'register.php', true);
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+            xhr.onload = function() {
+                var response = JSON.parse(xhr.responseText);
+                handleResponse(response.status, response.message);
+            };
+
+            xhr.send(formData);
+        }
+
+        function handleResponse(status, message) {
+            var modal = document.getElementById('messageModal');
+            var modalContent = document.getElementById('modalContent');
+            var modalTitle = document.getElementById('modalTitle');
+            var redirectButton = document.getElementById('redirectButton');
+
+            if (status === 'success') {
+                modalTitle.textContent = 'Success';
+                modalContent.textContent = message;
+                modal.style.backgroundColor = '#d4edda'; // Green background for success
+                modal.style.color = '#155724'; // Dark green text for success
+                redirectButton.textContent = 'Go to Login';
+                redirectButton.onclick = function() {
+                    window.location.href = 'login.html';
+                };
+            } else {
+                modalTitle.textContent = 'Error';
+                modalContent.textContent = message;
+                modal.style.backgroundColor = '#f8d7da'; // Red background for error
+                modal.style.color = '#721c24'; // Dark red text for error
+                redirectButton.textContent = 'Try Again';
+                redirectButton.onclick = function() {
+                    window.location.href = 'register.html';
+                };
+            }
+
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('messageModal').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        <form onsubmit="handleRegister(event)">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn">Register</button>
+        </form>
+        <a href="index.html" class="back-link">Back to Home</a>
+    </div>
+
+    <!-- Modal for displaying messages -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+            <button id="redirectButton" class="btn">Redirect</button>
+        </div>
+    </div>
+</body>
+</html>

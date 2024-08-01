@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin-bottom: 10px;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .overlay-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .close-overlay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+        .x-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>C Programming Exam</h1>
+        <span class="x-button" id="x-button">&times;</span>
+        <form id="exam-form">
+            <div class="question">
+                <p><strong>1. What is C?</strong></p>
+                <ul class="options">
+                    <li><input type="radio" name="q1" value="A"> A. A type of variable</li>
+                    <li><input type="radio" name="q1" value="B"> B. A programming language</li>
+                    <li><input type="radio" name="q1" value="C"> C. A constant</li>
+                    <li><input type="radio" name="q1" value="D"> D. A data type</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p><strong>2. Which of the following is used to declare a variable in C?</strong></p>
+                <ul class="options">
+                    <li><input type="radio" name="q2" value="A"> A. int</li>
+                    <li><input type="radio" name="q2" value="B"> B. #include</li>
+                    <li><input type="radio" name="q2" value="C"> C. void</li>
+                    <li><input type="radio" name="q2" value="D"> D. return</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p><strong>3. What is a constant in C?</strong></p>
+                <ul class="options">
+                    <li><input type="radio" name="q3" value="A"> A. A variable that changes its value</li>
+                    <li><input type="radio" name="q3" value="B"> B. A value that cannot be modified during execution</li>
+                    <li><input type="radio" name="q3" value="C"> C. A data type</li>
+                    <li><input type="radio" name="q3" value="D"> D. A special kind of function</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p><strong>4. Which of the following is not a data type in C?</strong></p>
+                <ul class="options">
+                    <li><input type="radio" name="q4" value="A"> A. int</li>
+                    <li><input type="radio" name="q4" value="B"> B. char</li>
+                    <li><input type="radio" name="q4" value="C"> C. float</li>
+                    <li><input type="radio" name="q4" value="D"> D. string</li>
+                </ul>
+            </div>
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+        <div id="result" class="result" style="display: none;"></div>
+    </div>
+    <script>
+        const correctAnswers = {
+            q1: 'B',
+            q2: 'A',
+            q3: 'B',
+            q4: 'D'
+        };
+
+        document.getElementById('exam-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting normally
+
+            // Get selected answers
+            const answers = {
+                q1: document.querySelector('input[name="q1"]:checked')?.value,
+                q2: document.querySelector('input[name="q2"]:checked')?.value,
+                q3: document.querySelector('input[name="q3"]:checked')?.value,
+                q4: document.querySelector('input[name="q4"]:checked')?.value
+            };
+
+            // Calculate score
+            let score = 0;
+            let totalQuestions = Object.keys(correctAnswers).length;
+
+            for (let question in correctAnswers) {
+                if (answers[question] === correctAnswers[question]) {
+                    score++;
+                }
+            }
+
+            // Display the score
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<h2>Exam Completed!</h2><p>Your score: ${score} out of ${totalQuestions}</p>`;
+            resultDiv.style.display = 'block';
+
+            // Redirect to c.html after a short delay to allow the user to see their score
+            setTimeout(() => {
+                window.location.href = 'c.html';
+            }, 2000); // 2 seconds delay
+        });
+
+        document.getElementById('x-button').addEventListener('click', function() {
+            showConfirmationPopup();
+        });
+
+        function showConfirmationPopup() {
+            const overlay = document.createElement('div');
+            overlay.className = 'overlay';
+            overlay.innerHTML = `
+                <div class="overlay-content">
+                    <span class="close-overlay">&times;</span>
+                    <p>Are you afraid of the exam?</p>
+                    <button class="btn-primary" id="yes-button">Yes</button>
+                    <button class="btn-primary" id="no-button">No</button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+
+            const closeButton = overlay.querySelector('.close-overlay');
+            closeButton.onclick = () => document.body.removeChild(overlay);
+
+            document.getElementById('yes-button').onclick = () => {
+                document.body.removeChild(overlay);
+                window.location.href = 'c.html'; // Redirect to C course page
+            };
+
+            document.getElementById('no-button').onclick = () => {
+                document.body.removeChild(overlay);
+                showEncouragementPopup(); // Show encouragement popup
+            };
+
+            window.onclick = (event) => {
+                if (event.target === overlay) {
+                    document.body.removeChild(overlay);
+                }
+            };
+        }
+
+        function showEncouragementPopup() {
+            const overlay = document.createElement('div');
+            overlay.className = 'overlay';
+            overlay.innerHTML = `
+                <div class="overlay-content">
+                    <span class="close-overlay">&times;</span>
+                    <p>The legends never give up. Complete the exam!</p>
+                    <button class="btn-primary" id="continue-button">Continue</button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+
+            const closeButton = overlay.querySelector('.close-overlay');
+            closeButton.onclick = () => document.body.removeChild(overlay);
+
+            document.getElementById('continue-button').onclick = () => {
+                document.body.removeChild(overlay);
+            };
+
+            window.onclick = (event) => {
+                if (event.target === overlay) {
+                    document.body.removeChild(overlay);
+                }
+            };
+        }
+    </script>
+</body>
+</html>

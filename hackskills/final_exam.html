@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Programming Final Exam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 900px;
+            height: 90%;
+            overflow-y: auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .code-area {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+            height: 150px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>C Programming Final Exam</h1>
+        <form id="exam-form">
+            <!-- Multiple Choice Questions -->
+            <div class="question">
+                <p>1. What is the correct syntax to output "Hello World" in C?</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="a"> A) printf("Hello World");</label>
+                    <label><input type="radio" name="q1" value="b"> B) echo("Hello World");</label>
+                    <label><input type="radio" name="q1" value="c"> C) print("Hello World");</label>
+                    <label><input type="radio" name="q1" value="d"> D) Console.WriteLine("Hello World");</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>2. How do you declare a variable of type integer in C?</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="a"> A) int number;</label>
+                    <label><input type="radio" name="q2" value="b"> B) integer number;</label>
+                    <label><input type="radio" name="q2" value="c"> C) num int;</label>
+                    <label><input type="radio" name="q2" value="d"> D) var number: int;</label>
+                </div>
+            </div>
+            <!-- Coding Questions -->
+            <div class="question">
+                <p>3. Write a function in C that takes an integer as input and returns its square. (Write code below)</p>
+                <textarea class="code-area" name="coding1" placeholder="int square(int x) {\n    // Your code here\n}"></textarea>
+            </div>
+            <div class="question">
+                <p>4. Write a C program to find the largest number among three numbers. (Write code below)</p>
+                <textarea class="code-area" name="coding2" placeholder="int findLargest(int a, int b, int c) {\n    // Your code here\n}"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Submit Exam</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('exam-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Exam submitted successfully!');
+            // Add form submission logic here (e.g., AJAX request to submit answers to server)
+        });
+
+        // Ensure the page stays in fullscreen mode
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                alert("You have exited fullscreen mode. Please return to fullscreen mode to continue the exam.");
+                enterFullscreen();
+            }
+        });
+
+        function enterFullscreen() {
+            const fullscreenElement = document.documentElement;
+            if (fullscreenElement.requestFullscreen) {
+                fullscreenElement.requestFullscreen();
+            } else if (fullscreenElement.mozRequestFullScreen) { // Firefox
+                fullscreenElement.mozRequestFullScreen();
+            } else if (fullscreenElement.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+                fullscreenElement.webkitRequestFullscreen();
+            } else if (fullscreenElement.msRequestFullscreen) { // IE/Edge
+                fullscreenElement.msRequestFullscreen();
+            }
+        }
+
+        // Automatically enter fullscreen mode when the page loads
+        window.onload = enterFullscreen;
+    </script>
+</body>
+</html>
